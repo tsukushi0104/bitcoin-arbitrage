@@ -35,6 +35,14 @@ class Market(object):
             for order in self.depth[direction]:
                 order["price"] = self.fc.convert(order["price"], self.currency, "USD")
 
+    def convert_to_jpy(self):
+        if self.currency == "JPY":
+            return
+        for direction in ("asks", "bids"):
+            for order in self.depth[direction]:
+                order["price"] = self.fc.convert(order["price"], self.currency, "JPY")
+
+
     def ask_update_depth(self):
         try:
             self.update_depth()
